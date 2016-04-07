@@ -10,7 +10,7 @@ public class MusicPlayer : MonoBehaviour
     //Run before Start and just after an object is instantiated.
     private void Awake()
     {
-       Debug.Log("Music player is Awake" + GetInstanceID()); 
+       Debug.Log("Music player is Awake: " + GetInstanceID()); 
     }
 
     //Run this at the start of the scene.
@@ -18,7 +18,7 @@ public class MusicPlayer : MonoBehaviour
     {
         if (instance != null) //There is an instance of the object
         {
-            Debug.Log("Music player Start" + GetInstanceID());
+            Debug.Log("Music player Start: " + GetInstanceID());
             Destroy(gameObject);
             print("Music Player Is Playing.");
         }
