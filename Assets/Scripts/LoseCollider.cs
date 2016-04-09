@@ -3,19 +3,9 @@ using System.Collections;
 
 public class LoseCollider : MonoBehaviour
 {
-
-    // Use this for initialization
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
+    /*
+        Collisions Practice
+    */
     //Check for collision between the ball and the invisible floor.
     private void OnCollisionEnter2D(Collision2D theLoseColliision)
     {

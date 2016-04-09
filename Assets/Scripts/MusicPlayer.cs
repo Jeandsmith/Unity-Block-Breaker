@@ -10,27 +10,14 @@ public class MusicPlayer : MonoBehaviour
     private void Awake()
     {
         Debug.Log("Music player is Awake: " + GetInstanceID());
-        if (_instance != null) //There is an instance of the object
+        if (_instance != null) //If thee script is attached already to something
         {
             Debug.Log("Music player Start: " + GetInstanceID()); //The id of the instance does not print to the console
             Destroy(gameObject);
             print("Music Player Is Playing.");
-        } else
-        {
-            _instance = this;
-            GameObject.DontDestroyOnLoad(gameObject);
-        }
-    }
-
-    //Run this at the start of the scene.
-    void Start()
-    {
-
-    }
-
-    // Run this every frame of the game
-    private void Update()
-    {
-
+        } else{ // If the instance is not attached to anything
+                _instance = this;
+                GameObject.DontDestroyOnLoad(gameObject);
+              }
     }
 }
