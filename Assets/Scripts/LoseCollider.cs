@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class LoseCollider : MonoBehaviour
 {
@@ -11,7 +10,7 @@ public class LoseCollider : MonoBehaviour
     {
         if (theLoseColliision.collider)  //Check if something has collided with me.
         {
-            print("Collision has happened.");
+            print("Ball Still Safe");
         }
     }
 
@@ -22,7 +21,7 @@ public class LoseCollider : MonoBehaviour
         {
             // collider.IsTrigger will return true if i trigger the other object
             //The method alone with no addition will check if i was triggered.
-            print("This i have trigger checked and will ignore collision.");
+            print("The Ball Has Fallen");
         }
     }
 }
