@@ -7,22 +7,25 @@ public class Ball : MonoBehaviour
     public Paddle Paddle;
 
     private bool _gameStarted = false;
-    private Vector3 _paddleToBallVector;
+	//Get the location of the paddles in relation to the ball
+	private Vector3 _ballToPaddleVector;
+	//Havee control of the rigidbody's properties
     private Rigidbody2D _ballRigidbody2D;
 	// Use this for initialization
 	void Start ()
 	{
-	    _paddleToBallVector = this.transform.position - Paddle.transform.position;
+	    _ballToPaddleVector = this.transform.position - Paddle.transform.position;
 	    _ballRigidbody2D = GetComponent<Rigidbody2D>();
 	}
 	
 	// Update is called once per frame
 	void Update ()
 	{
+		//If the game has not started
 	    if (!_gameStarted)
 	    {
             //Lock the ball to relative position of the paddle
-            this.transform.position = Paddle.transform.position + _paddleToBallVector;
+            this.transform.position = Paddle.transform.position + _ballToPaddleVector;
             //Wait for the mouse click then move the ball and set the game to true it has started.
             if (Input.GetMouseButtonDown(0))
             {
