@@ -17,9 +17,9 @@ public class LoseCollider : MonoBehaviour
     //Check if the ball is triggered or not
 	private void OnTriggerEnter2D(Collider2D loseCollider)
     {
-        if (loseCollider)
+		if (loseCollider)
         {
-            // collider.IsTrigger will return true if i trigger the other object
+            // collider.IsTrigger will return true if i get in contact trigger the other object
             //The method alone with no addition will check if i was triggered.
             print("The Ball Has Fallen");
         }
