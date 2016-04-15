@@ -4,8 +4,7 @@ using System.Collections;
 public class Ball : MonoBehaviour
 {
     //Allow you to have access to the paddle class/Scrip and object. 
-    public Paddle Paddle;
-
+	private Paddle Paddle;
     private bool _gameStarted = false;
 	//Get the location of the paddles in relation to the ball
 	private Vector3 _ballToPaddleVector;
@@ -14,6 +13,8 @@ public class Ball : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
+		//Find and returns the object of type (Data type);
+		Paddle = GameObject.FindObjectOfType<Paddle>();
 	    _ballToPaddleVector = this.transform.position - Paddle.transform.position;
 	    _ballRigidbody2D = GetComponent<Rigidbody2D>();
 	}
