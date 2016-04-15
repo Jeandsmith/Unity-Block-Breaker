@@ -25,17 +25,10 @@ public class Brick : MonoBehaviour {
 
 	private void BrickHitManager()
 	{
-		if(_hits == _maxHits)
+		if(_hits >= _maxHits)
 		{
 			//Destroy this game object if hits is equal to max hit allowed.
-			Object.Destroy(this.gameObject);
-		}
-		//Check the amount of bricks in the room
-		Brick [] BrickCount = Brick.FindObjectsOfType<Brick>();
-		if(BrickCount.Length == 0)
-		{
-			print("There is no more bricks");
-			MoveToNextLevel();
+			Destroy(this.gameObject);
 		}
 	}
 	private void MoveToNextLevel()
