@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class Brick : MonoBehaviour {
 
-	public int _hits;
-	public int _maxHits = 2;
+	private int _hits;
+	public Sprite [] HitSprites;
 
 	private Brick _bricks;
 	private LevelManager _levelManager;
@@ -25,14 +26,24 @@ public class Brick : MonoBehaviour {
 
 	private void BrickHitManager()
 	{
-		if(_hits >= _maxHits)
+		int  maxHits = HitSprites.Length + 1;
+		if(_hits >= maxHits)
 		{
 			//Destroy this game object if hits is equal to max hit allowed.
 			Destroy(this.gameObject);
-		}
+		} else {LoadSprites();}
 	}
+	//load sprites
+	void LoadSprites()
+	{
+//		change thee sprite by how many times i have been hit and not by the length of my max hits
+		int spriteIndex = _hits - 1;
+		this.GetComponent<SpriteRenderer>().sprite = HitSprites[spriteIndex];
+	}
+	//Load the next level
 	private void MoveToNextLevel()
 	{
 		_levelManager.LoadNextLevel();
+
 	}
 }
