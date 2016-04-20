@@ -2,48 +2,66 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 
-public class Brick : MonoBehaviour {
+public class Brick : MonoBehaviour
+{
 
-	private int _hits;
-	public Sprite [] HitSprites;
+    public Sprite[] HitSprites;
+	public static int _breakableCount;
 
-	private Brick _bricks;
-	private LevelManager _levelManager;
+    private int _hits;
+    private Brick _bricks;
+    private LevelManager _levelManager;
+	private Ball ball;
+	private bool isBreakable;
 
-	void Start()
-	{
-		_bricks = GameObject.FindObjectOfType<Brick>();
-		_levelManager = GameObject.FindObjectOfType<LevelManager>();
-	}
-
-	//Check if this objects has been collided with.
-	private void OnCollisionEnter2D(Collision2D other)
-	{
-		_hits++;
-		//Check if that was the last brick
-		BrickHitManager();
-	}
-
-	private void BrickHitManager()
-	{
-		int  maxHits = HitSprites.Length + 1;
-		if(_hits >= maxHits)
+    void Start()
+    {
+		isBreakable = (this.tag == "Breakable");
+		//Keep track of the breakable bricks
+		if(isBreakable)
 		{
-			//Destroy this game object if hits is equal to max hit allowed.
-			Destroy(this.gameObject);
-		} else {LoadSprites();}
-	}
-	//load sprites
-	void LoadSprites()
-	{
-//		change thee sprite by how many times i have been hit and not by the length of my max hits
-		int spriteIndex = _hits - 1;
-		this.GetComponent<SpriteRenderer>().sprite = HitSprites[spriteIndex];
-	}
-	//Load the next level
-	private void MoveToNextLevel()
-	{
-		_levelManager.LoadNextLevel();
+			_breakableCount++;
+		}
+        _bricks = GameObject.FindObjectOfType<Brick>();
+        _levelManager = GameObject.FindObjectOfType<LevelManager>();
+		_breakableCount = 0;
+    }
 
+	//Run this every frame
+	void Update()
+	{
+		
 	}
+    //Check if this objects has been collided with.
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+		if (isBreakable)
+		{
+			BrickHitManager();
+		}
+		//BrickHitManager();
+    }
+	private void BrickHitManager()
+    {
+        _hits++;
+        int maxHits = HitSprites.Length + 1;
+        if (_hits >= maxHits)
+        {
+			_breakableCount--;
+			if(_breakableCount <= 0) {_breakableCount = 0;}
+			_levelManager.LastBrickDestroy();
+            Destroy(gameObject);
+			print("Brick Destroy: " + _breakableCount);
+        } else { LoadSprites(); }
+    }
+    //load sprites
+    private void LoadSprites()
+    {
+        //change thee sprite by how many times i have been hit and not by the length of my max hits   
+        int spriteIndex = _hits - 1;
+        if (HitSprites[spriteIndex] == true) //Checks if the index of the array contains an sprite. If not, nothing will happen.
+        {
+            this.gameObject.GetComponent<SpriteRenderer>().sprite = HitSprites[spriteIndex];
+        }
+    }
 }

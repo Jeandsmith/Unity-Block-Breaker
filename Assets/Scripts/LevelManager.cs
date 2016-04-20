@@ -23,4 +23,12 @@ public class LevelManager : MonoBehaviour
 		//This will add one to the build index or number of where the scene is resulting on jumping to the next level.
 		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 	}
+
+	public void LastBrickDestroy()
+	{
+		if(Brick._breakableCount <= 0)
+		{
+			LoadNextLevel();
+		}
+	}
 }
