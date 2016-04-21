@@ -26,7 +26,7 @@ public class LevelManager : MonoBehaviour
 
 	public void LastBrickDestroy()
 	{
-		if(Brick._breakableCount <= 0)
+		if(Brick.BreakableCount <= 0)
 		{
 			LoadNextLevel();
 		}
