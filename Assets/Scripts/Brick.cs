@@ -6,13 +6,12 @@ public class Brick : MonoBehaviour
 {
 
 	public Sprite[] HitSprites;
-	public static int BreakableCount;
+	public static int BreakableCount; //This variable is static in order for me to be able to easily use it within other LevelManager Class.
     public AudioClip CrackSound;
 
 	private int _hits;
 	private Brick _bricks;
 	private LevelManager _levelManager;
-	private Ball _ball;
 	private bool _isBreakable;
 
 	void Start ()
@@ -36,7 +35,7 @@ public class Brick : MonoBehaviour
 	//Check if this objects has been collided with.
 	private void OnCollisionEnter2D (Collision2D other)
 	{
-        AudioSource.PlayClipAtPoint(CrackSound, gameObject.transform.position, .5f);
+        AudioSource.PlayClipAtPoint(CrackSound, gameObject.transform.position, .25f);
 		if (_isBreakable)
 		{
 			BrickHitManager ();
@@ -68,8 +67,9 @@ public class Brick : MonoBehaviour
 		//change thee sprite by how many times i have been hit and not by the length of my max hits   
 		int spriteIndex = _hits - 1;
 		if (HitSprites [spriteIndex] == true) 
-		{ //Checks if the index of the array contains an sprite. If not, nothing will happen.
-			this.gameObject.GetComponent<SpriteRenderer> ().sprite = HitSprites [spriteIndex];
+		{ 
+            //Checks if the index of the array contains an sprite. If not, nothing will happen.
+			gameObject.GetComponent<SpriteRenderer> ().sprite = HitSprites [spriteIndex];
 		}
 	}
 }
