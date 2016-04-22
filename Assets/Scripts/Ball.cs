@@ -56,17 +56,17 @@ public class Ball : MonoBehaviour
         if (_gameStarted)  // If true. false if it has the (!) at the start.
         {
             _ballRigidbody2D.velocity += tweakMovement;
-            KeepTrackOfParticle();
+            KeepTrackOfParticles();
             _audioClip.Play();
         }
     }
 
-    void KeepTrackOfParticle()
+    void KeepTrackOfParticles()
     {
         _particleClone = Instantiate(ParticleEffect, this.transform.position, this.transform.rotation) as GameObject;
         _particleCount++;
         //delete overtaking particles
-        if (_particleCount >= 2)
+        if (_particleCount >= 0)
         {
             _particleCount--;
             Destroy(_particleClone, 1f);
