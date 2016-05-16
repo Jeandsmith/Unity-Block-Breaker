@@ -1,27 +1,17 @@
 ﻿using UnityEngine;
+using System.Collections;
 
-public class LoseCollider : MonoBehaviour
+public class LoseCollider: MonoBehaviour
 {
-    /*
-        Collisions Practice
-    */
-    //Check for collision between the ball and the invisible floor.
-    private void OnCollisionEnter2D(Collision2D theLoseColliision)
-    {
-        if (theLoseColliision.collider)  //Check if something has collided with me.
-        {
-            print("Ball Still Safe");
-        }
-    }
+      
+      private LevelManager _levelManager;
 
-    //Check if the ball is triggered or not
-    private void OnTriggerEnter2D(Collider2D theLoseCollider)
-    {
-        if (theLoseCollider)
-        {
-            // collider.IsTrigger will return true if i trigger the other object
-            //The method alone with no addition will check if i was triggered.
-            print("The Ball Has Fallen");
-        }
-    }
+      //Check if the ball is triggered or not
+      private void OnTriggerEnter2D(Collider2D loseColliderHit)
+      {
+            //This function will look for the object of type type when the game is active. If the object is active during run-time 
+            //this function will return true.
+            _levelManager = FindObjectOfType<LevelManager>();
+            _levelManager.LoadLevel( "End" ); //Load the end level
+      }
 }
